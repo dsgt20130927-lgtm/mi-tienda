@@ -10,14 +10,14 @@
     }
 
     header {
-      background: #ff4d4d;
+      background: #ff3c3c;
       color: white;
       padding: 15px;
-      font-size: 24px;
       text-align: center;
+      font-size: 22px;
     }
 
-    .contenedor {
+    .productos {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -26,22 +26,19 @@
 
     .producto {
       background: white;
-      width: 180px;
       margin: 10px;
+      padding: 10px;
       border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-      overflow: hidden;
+      width: 180px;
       text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
 
     .producto img {
       width: 100%;
-      height: 150px;
+      height: 140px;
       object-fit: cover;
-    }
-
-    .producto h3 {
-      margin: 10px 0;
+      border-radius: 10px;
     }
 
     .precio {
@@ -54,39 +51,98 @@
       color: white;
       border: none;
       padding: 10px;
-      width: 90%;
-      margin-bottom: 10px;
-      border-radius: 5px;
+      margin-top: 5px;
       cursor: pointer;
+      border-radius: 5px;
     }
 
+    #carrito {
+      position: fixed;
+      right: 10px;
+      top: 10px;
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
+      width: 220px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
   </style>
 </head>
 <body>
 
 <header>🛒 Mi Tienda</header>
 
-<div class="contenedor">
+<div id="carrito">
+  <h3>Carrito</h3>
+  <ul id="lista"></ul>
+  <button onclick="comprar()">Comprar por WhatsApp</button>
+</div>
+
+<div class="productos">
 
   <div class="producto">
     <img src="https://via.placeholder.com/200">
-    <h3>Zapatos</h3>
-    <p class="precio">$200.000</p>
-    <a href="https://wa.me/573204077549">
-      <button>Comprar</button>
-    </a>
+    <h3>Zapatos Nike</h3>
+    <p class="precio">$120.000</p>
+    <button onclick="agregar('Zapatos Nike')">Agregar</button>
   </div>
 
   <div class="producto">
     <img src="https://via.placeholder.com/200">
-    <h3>Camiseta</h3>
-    <p class="precio">$50.000</p>
-    <a href="https://wa.me/573204077549">
-      <button>Comprar</button>
-    </a>
+    <h3>Zapatos Adidas</h3>
+    <p class="precio">$110.000</p>
+    <button onclick="agregar('Zapatos Adidas')">Agregar</button>
+  </div>
+
+  <div class="producto">
+    <img src="https://via.placeholder.com/200">
+    <h3>Pantalón Jeans</h3>
+    <p class="precio">$80.000</p>
+    <button onclick="agregar('Pantalón Jeans')">Agregar</button>
+  </div>
+
+  <div class="producto">
+    <img src="https://via.placeholder.com/200">
+    <h3>Pantalón Deportivo</h3>
+    <p class="precio">$60.000</p>
+    <button onclick="agregar('Pantalón Deportivo')">Agregar</button>
+  </div>
+
+  <div class="producto">
+    <img src="https://via.placeholder.com/200">
+    <h3>Camiseta Urbana</h3>
+    <p class="precio">$40.000</p>
+    <button onclick="agregar('Camiseta Urbana')">Agregar</button>
+  </div>
+
+  <div class="producto">
+    <img src="https://via.placeholder.com/200">
+    <h3>Gorra</h3>
+    <p class="precio">$25.000</p>
+    <button onclick="agregar('Gorra')">Agregar</button>
   </div>
 
 </div>
 
+<script>
+  let carrito = [];
+
+  function agregar(producto) {
+    carrito.push(producto);
+
+    let lista = document.getElementById("lista");
+    let item = document.createElement("li");
+    item.textContent = producto;
+    lista.appendChild(item);
+  }
+
+  function comprar() {
+    let mensaje = "Hola, quiero comprar: " + carrito.join(", ");
+    let url = "https://wa.me/573204077549?text=" + encodeURIComponent(mensaje);
+    window.open(url);
+  }
+</script>
+
 </body>
 </html>
+
